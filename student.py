@@ -275,7 +275,7 @@ class Student:
         
         studentgender_combo = ttk.Combobox(
             class_frame,
-            textvariable=self.var_semester,
+            textvariable=self.var_gender,
             font=("times new  roman", 10, "bold"),
             state="readonly",
         )
@@ -672,7 +672,7 @@ class Student:
                     database="face_recognizer",
                 )
                     my_cursor = conn.cursor()
-                    my_cursor.execute("Update a student set Dep=%s,Year=%s,Semester=%s,Name=%s,Roll=%s,Gender=%s,DOB=%s,Address=%s,num=%s,email=%s,Photosample=%s where std_id=%s",(
+                    my_cursor.execute("Update student set Dep=%s,Year=%s,Semester=%s,Name=%s,Roll=%s,Gender=%s,DOB=%s,Address=%s,num=%s,email=%s,Photosample=%s where Student_id=%s",(
                         
                         self.var_dep.get(),
                         self.var_year.get(),
@@ -691,6 +691,8 @@ class Student:
                 )
                     
                 else:
+                    
+                    
                     if not Update:
                         return
                 messagebox.showinfo("Success","Student Details Successfully update Completed",parent=self.root)
@@ -698,7 +700,7 @@ class Student:
                 self.fetch_data()
                 conn.close()
                 
-                    
+                     
             except Exception as es:
                 messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)           
         
@@ -769,9 +771,9 @@ class Student:
                 my_cursor.execute("Select *From Student")
                 myresult=my_cursor.fetchall()
                 id=0
-                for x in myresult:
+                for X in myresult:
                     id+=1
-                my_cursor.execute("Update a student set Dep=%s,Year=%s,Semester=%s,Name=%s,Roll=%s,Gender=%s,DOB=%s,Address=%s,num=%s,email=%s,Photosample=%s where std_id=%s",(
+                my_cursor.execute("Update  student set Dep=%s,Year=%s,Semester=%s,Name=%s,Roll=%s,Gender=%s,DOB=%s,Address=%s,num=%s,email=%s,Photosample=%s where Student_id=%s",(
                         
                         self.var_dep.get(),
                         self.var_year.get(),
@@ -784,7 +786,7 @@ class Student:
                         self.var_num.get(),
                         self.var_email.get(),
                         self.var_radio1.get(),
-                        self.var_std_id.get()==+1
+                        self.var_std_id.get()
                         
                     ))
                     
@@ -823,17 +825,17 @@ class Student:
                         cv2.putText(face,str(img_id),(50,50),cv2.FONT_HERSHEY_COMPLEX,2,(0,255,0),2)
                         cv2.imshow("Cropped Face",face)
                     
-                    if cv2.waitkey(1)==13 or int(img_id)==100:
-                        break
-                    cap.release()
-                    cv2.destroyAllWindows()
-                    messagebox.showinfo("Result","Generating Data Sets Completed !!!")
+                    if cv2.waitKey(1)==13 or int(img_id)==100:
+                     break
+                cap.release()
+                cv2.destroyAllWindows()
+                messagebox.showinfo("Result","Generating Data Sets Completed !!!")
                     
             except Exception as es:
                 messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)                     
                 
-                    
-                
+
+
                 
                     
             

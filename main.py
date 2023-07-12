@@ -1,8 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+import os
+import tkinter
 from student import Student
-
+from train  import Train
+from face_recog import Face_Recognition
+from attendance import Attendance
 
 class face_recoginiton_system:
     def __init__(self, root):
@@ -79,12 +83,12 @@ class face_recoginiton_system:
         img5 = img5.resize((220, 220), Image.Resampling.LANCZOS)
         self.photoimg5 = ImageTk.PhotoImage(img5)
 
-        b1 = Button(bg_img, image=self.photoimg5, cursor="hand2")
+        b1 = Button(bg_img, image=self.photoimg5,command=self.face_data, cursor="hand2")
         b1.place(x=500, y=75, width=180, height=180)
 
         b1_1 = Button(
             bg_img,
-            text="Face Detector",
+            text="Face Detector",command=self.face_data,
             cursor="hand2",
             font=("times new  roman", 15, "bold"),
             bg="darkblue",
@@ -97,12 +101,12 @@ class face_recoginiton_system:
         img6 = img6.resize((220, 220), Image.Resampling.LANCZOS)
         self.photoimg6 = ImageTk.PhotoImage(img6)
 
-        b1 = Button(bg_img, image=self.photoimg6, cursor="hand2")
+        b1 = Button(bg_img, image=self.photoimg6, command=self.attendance_data,cursor="hand2")
         b1.place(x=800, y=70, width=180, height=180)
 
         b1_1 = Button(
             bg_img,
-            text="Attendance",
+            text="Attendance",command=self.attendance_data,
             cursor="hand2",
             font=("times new  roman", 15, "bold"),
             bg="darkblue",
@@ -115,12 +119,12 @@ class face_recoginiton_system:
         img7 = img7.resize((220, 220), Image.Resampling.LANCZOS)
         self.photoimg7 = ImageTk.PhotoImage(img7)
 
-        b1 = Button(bg_img, image=self.photoimg7, cursor="hand2")
+        b1 = Button(bg_img, image=self.photoimg7,command=self.train_data, cursor="hand2")
         b1.place(x=200, y=275, width=180, height=180)
 
         b1_1 = Button(
             bg_img,
-            text="Train Data",
+            text="Train Data",command=self.train_data,
             cursor="hand2",
             font=("times new  roman", 15, "bold"),
             bg="darkblue",
@@ -133,12 +137,13 @@ class face_recoginiton_system:
         img8 = img8.resize((220, 220), Image.Resampling.LANCZOS)
         self.photoimg8 = ImageTk.PhotoImage(img8)
 
-        b1 = Button(bg_img, image=self.photoimg8, cursor="hand2")
+        b1 = Button(bg_img, image=self.photoimg8,command=self.open_img, cursor="hand2")
         b1.place(x=500, y=275, width=180, height=180)
 
         b1_1 = Button(
             bg_img,
             text="Photos",
+            command=self.open_img,
             cursor="hand2",
             font=("times new  roman", 15, "bold"),
             bg="darkblue",
@@ -151,12 +156,12 @@ class face_recoginiton_system:
         img9 = img9.resize((220, 220), Image.Resampling.LANCZOS)
         self.photoimg9 = ImageTk.PhotoImage(img9)
 
-        b1 = Button(bg_img, image=self.photoimg9, cursor="hand2")
+        b1 = Button(bg_img, image=self.photoimg9, command=self.iExit,cursor="hand2")
         b1.place(x=800, y=275, width=180, height=180)
 
         b1_1 = Button(
             bg_img,
-            text="Exit",
+            text="Exit",command=self.iExit,
             cursor="hand2",
             font=("times new  roman", 15, "bold"),
             bg="darkblue",
@@ -164,11 +169,43 @@ class face_recoginiton_system:
         )
         b1_1.place(x=800, y=450, width=180, height=40)
 
+    
+    def open_img(self):
+        os.startfile("data")
+        
+        
+    def iExit(self):
+        self.iExit=tkinter.messagebox.askyesno("Face Recognition", "Are You Sure To Exit",parent=self.root)
+        if self.iExit>0:
+            self.root.destroy()
+        else:
+            return
+    
+    
+    
         ##########Functiion Buttons########
 
     def students_details(self):
         self.new_window = Toplevel(self.root)
         self.app = Student(self.new_window)
+
+    def train_data(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Train(self.new_window)
+        
+        
+        
+        
+    def face_data(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Face_Recognition(self.new_window)
+        
+    def attendance_data(self):
+        self.new_window = Toplevel(self.root)
+        self.app = Attendance(self.new_window) 
+
+
+
 
 
 if __name__ == "__main__":
